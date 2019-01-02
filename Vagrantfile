@@ -1,7 +1,9 @@
-bridge_net="192.168.1."
-internal_net="192.168.4."
-internal_route=internal_net+"0/24"
-domain="example.com"
+bridge_net = "192.168.1."
+internal_net = "192.168.4."
+internal_dns = internal_net + "200"
+internal_gateway = internal_net + "1"
+internal_route = internal_net + "0/24"
+domain = "example.com"
 
 servers=[
   {
@@ -39,15 +41,13 @@ Vagrant.configure(2) do |config|
         # node.vm.usable_port_range = (2200..2250)
             # node.vm.network "public_network", ip: machine[:ip], bridge: 'Intel(R) Centrino(R) Wireless-N 130'
             node.vm.hostname = machine[:hostname]
-            #node.vm.network "private_network", ip: machine[:ip_int], :net mask: "255.255.255.0", :gateway "192.168.4.1", :dns_nameserver "192.168.4.200", dns_search: "example.com"
             node.vm.network "private_network", ip: machine[:ip_int]
-            #, auto_config: false
             node.vm.provision "shell",
               run: "always",
               inline: "nmcli con mod enp0s3 ipv4.ignore-auto-dns yes; nmcli con reload enp0s3"
             node.vm.provision "shell",
               run: "always",
-              inline: "nmcli con mod \"System enp0s8\" ipv4.addresses \"" + machine[:ip_int] + "/24 192.168.4.1\" ipv4.dns 192.168.4.200"
+              inline: "nmcli con mod \"System enp0s8\" ipv4.addresses \"" + machine[:ip_int] + "/24 " + internal_gateway + "\" ipv4.dns " + internal_dns
               node.vm.network "forwarded_port", guest: 22, host: machine[:ssh_port], id: "ssh"
             node.ssh.password = "vagrant"
             if (machine[:name].include? "server")
