@@ -1,6 +1,6 @@
 Vagrant boxes (virtualbox provider):
 
-For servers & server2:
+For servers1 & server2:
 
 	vagrant init gespinal/rhel7.0 \
 		--box-version 1.0
