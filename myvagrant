@@ -1,0 +1,33 @@
+Vagrant.configure("2") do |config|
+  config.vm.define "ipa" do |ipa|
+    ipa.vm.box = "rhel7.0"
+    ipa.vm.hostname = 'ipa'
+    #ipa.vm.box_url = "gespinal/rhel7.0"
+
+    ipa.vm.network :private_network, ip: "192.168.4.200"
+    ipa.vm.network :forwarded_port, guest: 22, host: 10122, id: "ssh"
+
+
+    ipa.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--memory", 512]
+      v.customize ["modifyvm", :id, "--name", "ipa"]
+    end
+  end
+
+  config.vm.define "server1" do |server1|
+    server1.vm.box = "rhel7.0"
+    server1.vm.hostname = 'server1'
+    #server1.vm.box_url = "gespinal/rhel7.0"
+
+    server1.vm.network :private_network, ip: "192.168.4.210"
+    server1.vm.network :forwarded_port, guest: 22, host: 10222, id: "ssh"
+
+    server1.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--memory", 512]
+      v.customize ["modifyvm", :id, "--name", "server1"]
+    end
+  end
+
+end

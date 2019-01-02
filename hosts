@@ -1,0 +1,7 @@
+[lab]
+labipa.example.com
+server1.example.com
+server2.example.com
+
+[test]
+10.0.0.1

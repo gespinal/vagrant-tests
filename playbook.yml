@@ -1,0 +1,76 @@
+---
+
+- hosts: labipa.example.com
+
+  vars:
+    repo: |
+      [myrepo]
+      name=myrepo
+      enabled=1
+      gpgcheck=0
+      baseurl=file:///repo
+      
+  tasks:
+  
+  # - name: Create repository
+    # become: true
+    # copy:
+      # dest: '/etc/yum.repos.d/myrepo.repo'
+      # content: "{{ vars.repo }}"
+      
+  # - name: Install Packages
+    # become: true
+    # yum: name = {{ item }} state = present
+    # with_items:
+      # - "@Directory Client"
+      # - "@file-server"
+      # - httpd
+      # - nfs-utils
+      # - cifs-utils
+      # - samba
+      # - samba-client
+      # - samba-common
+      # - nss-pam-ldapd
+      # - krb5-server
+      # - krb5-workstation
+      # - pam_krb5
+      # - libvirt
+      # - libvirt-client
+      # - openldap
+      # - openldap-clients
+      # - openldap-servers
+      # - setools-console
+      # - setroubleshoot-server
+      # - setroubleshoot
+      # - policycoreutils-python
+      # - bind
+      # - unbound
+      # - postfix
+      # - ntpd
+      # - chronyd
+      # - targetcli
+      # - teamd
+      
+  - name: Enable Services
+    become: true
+    service: name = {{ item }} state = started enabled = true
+    with_items:
+      - samba
+      - nfs-server
+      - rpcbind
+      - smb
+      - nmb
+      - target
+      - httpd
+      - chronyd
+
+      
+
+        # lineinfile:
+          # path: VagrantFile
+          # line: "{{ item }}"
+          # insertafter: "config.vm.box"
+        # with_items:
+          # - "  config.vm.network \"private_network\", ip: \"0.0.0.0\", auto_network: true\n  config.vm.network \"private_network\", ip: \"0.0.0.0\", auto_network: true"
+          # - '  config.vm.network "private_network", ip: "192.168.4.200"'
+          
