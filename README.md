@@ -14,10 +14,10 @@ For LABIPA:
 
 REPO:
 
-  ftp://labipa.example.com/pub/repo
+  	ftp://labipa.example.com/pub/repo
 
 KRB5 Files:
 
-  ftp://labipa.example.com/pub/krb5.conf
-  ftp://labipa.example.com/pub/server1.keytab
-  ftp://labipa.example.com/pub/server2.keytab
+ 	ftp://labipa.example.com/pub/krb5.conf
+ 	ftp://labipa.example.com/pub/server1.keytab
+  	ftp://labipa.example.com/pub/server2.keytab
