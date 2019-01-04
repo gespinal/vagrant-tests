@@ -5,6 +5,14 @@ internal_gateway = internal_net + "1"
 internal_route = internal_net + "0/24"
 domain = "example.com"
 
+if Vagrant::Util::Platform.windows? then
+  serverbox = "rhel7.0"
+  labipabox = "rhel7.0-labipa"
+else
+  serverbox = "gespinal/rhel7.0"
+  labipabox = "gespinal/rhel7.0.labipa"
+end
+
 servers=[
   {
     :name => "labipa",
@@ -48,14 +56,12 @@ Vagrant.configure(2) do |config|
             node.vm.provision "shell",
               run: "always",
               inline: "nmcli con mod \"System enp0s8\" ipv4.addresses \"" + machine[:ip_int] + "/24 " + internal_gateway + "\" ipv4.dns " + internal_dns
-              node.vm.network "forwarded_port", guest: 22, host: machine[:ssh_port], id: "ssh"
+            node.vm.network "forwarded_port", guest: 22, host: machine[:ssh_port], id: "ssh"
             node.ssh.password = "vagrant"
             if (machine[:name].include? "server")
-                node.vm.box = "rhel7.0"
-                node.vm.network "private_network", ip: "0.0.0.0", auto_network: true
-                node.vm.network "private_network", ip: "0.0.0.0", auto_network: true
+                node.vm.box = serverbox
             else
-                node.vm.box = "rhel7.0-labipa"
+                node.vm.box = labipabox
             end
             node.vm.provider "virtualbox" do |vb|
                 vb.customize ["modifyvm", :id, "--memory", machine[:ram]]
@@ -66,6 +72,9 @@ Vagrant.configure(2) do |config|
                     # vb.customize ["storageattach", :id, "--storagectl", "IDE", "--port", 0, "--device", 0, "--type", "dvddrive", "--medium", machine[:dvd]]
                     # vb.customize ["modifyvm", :id, "--boot1", "disk"]
                     # vb.customize ["modifyvm", :id, "--boot2", "dvd"]
+                else
+                    vb.customize ["modifyvm", :id, "--nic3", "intnet"]
+                    vb.customize ["modifyvm", :id, "--nic4", "intnet"]
                 end
                 # if (!machine[:hdd_name].nil?)
                     # unless File.exist?(machine[:hdd_name])
