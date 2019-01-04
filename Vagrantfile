@@ -9,7 +9,7 @@ serverbox = "gespinal/rhel7.0"
 labipabox = "gespinal/rhel7.0.labipa"
 
 if Vagrant::Util::Platform.windows? then
-  if (#{ENV['COMPUTERNAME']}.include? "WR8"
+  if (#{ENV['COMPUTERNAME']}.include? "WR8")
     serverbox = "rhel7.0"
     labipabox = "rhel7.0-labipa"
   end
