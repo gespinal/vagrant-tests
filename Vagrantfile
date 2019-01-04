@@ -5,12 +5,14 @@ internal_gateway = internal_net + "1"
 internal_route = internal_net + "0/24"
 domain = "example.com"
 
+serverbox = "gespinal/rhel7.0"
+labipabox = "gespinal/rhel7.0.labipa"
+
 if Vagrant::Util::Platform.windows? then
-  serverbox = "rhel7.0"
-  labipabox = "rhel7.0-labipa"
-else
-  serverbox = "gespinal/rhel7.0"
-  labipabox = "gespinal/rhel7.0.labipa"
+  if (#{ENV['COMPUTERNAME']}.include? "WR8"
+    serverbox = "rhel7.0"
+    labipabox = "rhel7.0-labipa"
+  end
 end
 
 servers=[
