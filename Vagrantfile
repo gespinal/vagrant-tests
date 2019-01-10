@@ -52,8 +52,8 @@ Vagrant.configure(2) do |config|
             node.ssh.password = "vagrant"
             if (machine[:name].include? "server")
                 node.vm.box = "rhel7.0"
-                node.vm.network "private_network", ip: "0.0.0.0", auto_network: true
-                node.vm.network "private_network", ip: "0.0.0.0", auto_network: true
+                node.vm.network "private_network", ip: "0.0.0.0", auto_network: false, virtualbox__intnet: true
+                node.vm.network "private_network", ip: "0.0.0.0", auto_network: false, virtualbox__intnet: true
             else
                 node.vm.box = "rhel7.0-labipa"
             end
