@@ -9,7 +9,7 @@ For servers1 & server2:
 For LABIPA:
 
 	vagrant init gespinal/rhel7.0.labipa \
-		--box-version 1.0
+		--box-version 1.8
 	vagrant up
 
 REPO:
