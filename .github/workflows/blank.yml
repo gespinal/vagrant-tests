@@ -3,10 +3,10 @@ name: init
 on:
   pull_request:
     paths:
-#       - 'config/main.sh'
-#       - 'compose/**'
-#       - 'scripts/**'
-#       - 'utils/**'
+      - 'config/main.sh'
+      - 'compose/**'
+      - 'scripts/**'
+      - 'utils/**'
       - 'hosts'
       
 jobs:
