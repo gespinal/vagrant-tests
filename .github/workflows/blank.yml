@@ -7,3 +7,16 @@ on:
       - 'compose/**'
       - 'scripts/**'
       - 'utils/**'
+      - 'hosts'
+      
+jobs:
+  init:
+    runs-on: ubuntu-latest
+    env:
+      TERM: xterm
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Initialize
+        run: echo "hola"
