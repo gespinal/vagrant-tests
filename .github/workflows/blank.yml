@@ -1,0 +1,9 @@
+name: init
+
+on:
+  [pull_request]:
+    paths:
+      - 'config/main.sh'
+      - 'compose/**'
+      - 'scripts/**'
+      - 'utils/**'
