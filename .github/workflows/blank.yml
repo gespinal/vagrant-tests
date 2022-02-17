@@ -1,7 +1,7 @@
 name: init
 
 on:
-  [pull_request]:
+  pull_request:
     paths:
       - 'config/main.sh'
       - 'compose/**'
