@@ -17,10 +17,11 @@ jobs:
     defaults:
       run:
         shell: bash
-    steps:
-      - name: docker-compose-version
-        run: docker-compose-version
-
+        
     steps:
       - name: Initialize
         run: echo "hola"
+
+      - name: docker-compose-version
+        run: docker-compose-version
+
