@@ -18,5 +18,9 @@ jobs:
       run:
         shell: bash
     steps:
+      - name: docker-compose-version
+        run: docker-compose-version
+
+    steps:
       - name: Initialize
         run: echo "hola"
